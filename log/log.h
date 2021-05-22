@@ -6,7 +6,7 @@
 
 namespace Log
 {
-  static inline str(const std::string& _str)
+  static inline void str(const std::string& _str)
   {
     std::cout << _str << std::endl;
   }
