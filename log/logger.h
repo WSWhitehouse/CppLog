@@ -25,18 +25,18 @@ namespace Log
       switch (_severity)
       {
         case Log::Severity::LOG_INFO:
-          return "INFO:    ";
+          return "INFO:  ";
         case Log::Severity::LOG_DEBUG:
-          return "DEBUG:   ";
+          return "DEBUG: ";
         case Log::Severity::LOG_WARNING:
-          return "WARNING: ";
+          return "WARN:  ";
         case Log::Severity::LOG_ERROR:
-          return "ERROR:   ";
+          return "ERROR: ";
         case Log::Severity::LOG_FATAL:
-          return "FATAL:   ";
+          return "FATAL: ";
         case Log::Severity::LOG_INVALID:
         default:
-          return "UNKNOWN: ";
+          return "";
       }
     }
 
