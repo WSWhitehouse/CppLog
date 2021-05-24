@@ -67,18 +67,32 @@ namespace Log
       return time;
     }
 
-    std::string getLocation(const source_location& _location)
+    std::string getLocation(const source_location& _location, const size_t& _reserve)
     {
-      std::string location = _location.file_name();
+      // Magic number (7) = amount of colons and line/col numbers
+      size_t reserve = 7 + _reserve;
+      std::string output;
+      output.reserve(reserve);
 
-      location.find_last_of('/');
-      location.append(":");
-      location.append(_location.function_name());
-      location.append(":");
-      location.append(std::to_string(_location.line()));
-      location.append(":");
-      location.append(std::to_string(_location.column()));
-      return location;
+      // File Name
+      std::string file_name = _location.file_name();
+
+      if (file_name.empty() || file_name == "unsupported")
+      {
+        return {}; // Return empty if location is empty or unsupported
+      }
+
+      // Remove file path from start of file name
+      auto index = file_name.find_last_of('/');
+      output.append(index != std::string::npos ? file_name.substr(index + 1) : output);
+
+      output.append(":");
+      output.append(_location.function_name());
+      output.append(":");
+      output.append(std::to_string(_location.line()));
+      output.append(":");
+      output.append(std::to_string(_location.column()));
+      return output;
     }
   };
 } // namespace Log

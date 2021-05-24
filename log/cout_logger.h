@@ -66,7 +66,7 @@ namespace Log
       if (_severity >= m_showFileLocation)
       {
         output.push_back(' ');
-        output.append(getLocation(_location));
+        output.append(getLocation(_location, 10));
       }
 
       // Log message
