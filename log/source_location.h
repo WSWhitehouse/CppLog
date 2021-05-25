@@ -22,7 +22,7 @@ namespace Log
       const uint_least32_t columnOffset = 0) noexcept
 #else
     static constexpr source_location current(
-      const char* fileName = "unsupported", const char* functionName = "unsupported",
+      const char* fileName = unsupported_char, const char* functionName = unsupported_char,
       const uint_least32_t lineNumber = 0, const uint_least32_t columnOffset = 0) noexcept
 #endif
     {
@@ -31,6 +31,8 @@ namespace Log
 
     source_location(const source_location&) = default;
     source_location(source_location&&)      = default;
+
+    bool unsupported() const noexcept { return strcmp(fileName, unsupported_char) == 0; }
 
     constexpr const char* file_name() const noexcept { return fileName; }
 
@@ -53,6 +55,9 @@ namespace Log
     const char* functionName;
     const std::uint_least32_t lineNumber;
     const std::uint_least32_t columnOffset;
+
+    /* Const Data */
+    static inline const char* unsupported_char = "unsupported";
   };
 } // namespace Log
 

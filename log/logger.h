@@ -69,6 +69,11 @@ namespace Log
 
     std::string getLocation(const source_location& _location, const size_t& _reserve)
     {
+      if (_location.unsupported())
+      {
+        return {}; // Return empty string if location is unsupported
+      }
+
       // Magic number (7) = amount of colons and line/col numbers
       size_t reserve = 7 + _reserve;
       std::string output;
@@ -76,11 +81,6 @@ namespace Log
 
       // File Name
       std::string file_name = _location.file_name();
-
-      if (file_name.empty() || file_name == "unsupported")
-      {
-        return {}; // Return empty if location is empty or unsupported
-      }
 
       // Remove file path from start of file name
       auto index = file_name.find_last_of('/');
