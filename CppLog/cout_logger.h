@@ -84,7 +84,7 @@ namespace Log
     const size_t m_reserveOverhead = 64;
 
     /**
-     * \brief Show file location if log level is >= to this value (0 for all)
+     * \brief Show file location if CppLog level is >= to this value (0 for all)
      * */
     const Severity m_showFileLocation = LOG_WARNING;
 
