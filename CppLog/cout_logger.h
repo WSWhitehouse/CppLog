@@ -28,7 +28,7 @@ namespace Log
       size_t reserve_size = _msg.size() + m_reserveOverhead;
 
       // Severity String
-      const char* severity_str = getSeverityStr(_severity);
+      const char* severity_str = GetSeverityStr(_severity);
       reserve_size += strlen(severity_str);
 
       // Text Colour
@@ -53,7 +53,7 @@ namespace Log
       // Add severity string & timestamp
       output.push_back('[');
       output.append(severity_str);
-      output.append(getTimeStamp());
+      output.append(TimeStamp());
       output.push_back(']');
 
       // Reset console colours if they were updated previously
@@ -66,7 +66,7 @@ namespace Log
       if (_severity >= m_showFileLocation)
       {
         output.push_back(' ');
-        output.append(getLocation(_location, 10));
+        output.append(Location(_location, 10));
       }
 
       // Log message
