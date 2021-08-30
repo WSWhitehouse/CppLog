@@ -53,44 +53,20 @@ namespace Log
    protected:
     static const char* GetSeverityStr(const Severity& _severity)
     {
-#if 0
-      constexpr static const void* labels[] = {
-        [Severity::LOG_INFO] = &&Info,       [Severity::LOG_DEBUG] = &&Debug,
-        [Severity::LOG_WARNING] = &&Warning, [Severity::LOG_ERROR] = &&Error,
-        [Severity::LOG_FATAL] = &&Fatal,
-      };
-
-      goto* labels[_severity];
-
-
-      static std::unordered_map<Severity, const char*> sev = {
-        { Severity::LOG_INFO, "INFO:  " },    { Severity::LOG_DEBUG, "DEBUG: " },
-        { Severity::LOG_WARNING, "WARN:  " }, { Severity::LOG_ERROR, "ERROR: " },
-        { Severity::LOG_FATAL, "FATAL: " },
-      };
-      return sev.at(_severity);
-#endif
-
       switch (_severity)
       {
         case Log::Severity::LOG_INFO:
-        Info:
           return "INFO:  ";
         case Log::Severity::LOG_DEBUG:
-        Debug:
           return "DEBUG: ";
         case Log::Severity::LOG_WARNING:
-        Warning:
           return "WARN:  ";
         case Log::Severity::LOG_ERROR:
-        Error:
           return "ERROR: ";
         case Log::Severity::LOG_FATAL:
-        Fatal:
           return "FATAL: ";
         case Log::Severity::LOG_INVALID:
         default:
-        Invalid:
           return "";
       }
     }
