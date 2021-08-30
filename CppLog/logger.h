@@ -3,7 +3,9 @@
 
 #include <iomanip>
 #include <map>
+#include <sstream>
 #include <string>
+#include <chrono>
 
 #include "severity.h"
 #include "source_location.h"
@@ -92,7 +94,7 @@ namespace Log
       nowSs << std::put_time(&current_time, "%Y-%m-%d %T") << '.' << std::setfill('0')
             << std::setw(6) << microseconds.count() << std::put_time(&current_time, "%z");
 
-      auto time = nowSs.str();
+      std::string time = nowSs.str();
 
       /* somewhat special - maybe see systemtimeformatter */
       time.replace(time.end() - 2, time.end() - 2, ":");
