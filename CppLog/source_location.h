@@ -10,6 +10,11 @@ namespace Log
   struct source_location
   {
    public:
+
+// Warning C4067 - unexpected tokens following preprocessor directive, expected a newline
+#pragma warning( push )
+#pragma warning( disable : 4067 )
+
 #if not defined(__apple_build_version__) and defined(__clang__) and (__clang_major__ >= 9)
     static constexpr source_location current(
       const char* fileName = __builtin_FILE(), const char* functionName = __builtin_FUNCTION(),
@@ -28,6 +33,8 @@ namespace Log
     {
       return source_location(fileName, functionName, lineNumber, columnOffset);
     }
+
+#pragma warning( pop )
 
     source_location(const source_location&) = default;
     source_location(source_location&&)      = default;
